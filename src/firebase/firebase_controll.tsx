@@ -15,12 +15,12 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-// const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app);
 // const database = getDatabase(app);
 
 export function writeUserData(userId: any, name: any, email: any, imageUrl: any) {
-  const db = getDatabase();
+  const db = getDatabase(app);
   set(ref(db, 'users/' + userId), {
     username: name+10,
     email: email,
