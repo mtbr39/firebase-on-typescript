@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import initCanvas from '../scripts/canvas/init'
 
 const Canvas = () => {
     // contextを状態として持つ
@@ -15,6 +16,7 @@ const Canvas = () => {
     useEffect(()=>{
         if(context!==null)
         {
+            initCanvas(context)
             // const img = new Image()
             // img.src = "img.jpg" // 描画する画像など
             // img.onload = () => {
