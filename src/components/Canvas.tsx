@@ -19,7 +19,7 @@ const Canvas = () => {
         }
     },[canvas])
     
-    return <canvas width="1280" height="720" id="canvas"></canvas>
+    return <canvas id="canvas"></canvas>
 }
 
 export default Canvas

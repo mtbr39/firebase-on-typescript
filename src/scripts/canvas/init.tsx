@@ -1,6 +1,7 @@
 
 import ObjectManager from "./ObjectManager"
 import Mover from "./Mover"
+// import Utl from "./Utl"
 
 const initCanvas = (canvas: HTMLCanvasElement) => {
 
@@ -28,6 +29,22 @@ const initCanvas = (canvas: HTMLCanvasElement) => {
     }
 
     loop()
+
+    let cssCanvasSize = {width: document.documentElement.clientWidth, height: document.documentElement.clientHeight};
+    let pixelRatioCanvasSize = {width: cssCanvasSize.width * window.devicePixelRatio, height: cssCanvasSize.height * window.devicePixelRatio};
+
+    resizeCanvas();
+
+    function resizeCanvas() {
+        canvas.style.width = `${cssCanvasSize.width}px`;
+        canvas.style.height = `${cssCanvasSize.height}px`;
+        canvas.width = pixelRatioCanvasSize.width;
+        canvas.height = pixelRatioCanvasSize.height;
+        // if(Utl.isSmartPhone()) {
+        //     canvas.width = size.w * window.devicePixelRatio;
+        //     canvas.height = size.h * window.devicePixelRatio;
+        // }
+    };
 
 }
 
