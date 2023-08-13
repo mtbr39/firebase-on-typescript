@@ -1,14 +1,20 @@
 
 import Mover from "./Mover";
+import { Point } from "./Point";
+import {CtxStyle, Ctx2} from "./Ctx2";
 
 class ObjectDrawer {
     
     canvas: HTMLCanvasElement
     ctx: CanvasRenderingContext2D
+    ctx2: Ctx2
 
     constructor(canvas: HTMLCanvasElement) {
         this.canvas = canvas
         this.ctx = canvas.getContext("2d")!
+        const cw = Math.sqrt(canvas.width * canvas.height) * 0.001
+        const org = new Point(0,0)
+        this.ctx2 = new Ctx2(this.ctx, cw, org)
     }
 
     draw(objects: Mover[]) {
@@ -20,15 +26,11 @@ class ObjectDrawer {
                     object.drawSelf();
                     break;
                 case undefined:
-                case 'circle':
-                    this.ctx.beginPath()
-                    this.ctx.arc(object.position.x, object.position.y, object.radius, 0, Math.PI * 2, true)
-                    this.ctx.fillStyle = "lightskyblue"
-                    // this.ctx.fill()
-                    this.ctx.strokeStyle = 'deepskyblue'
-                    this.ctx.lineWidth = 1
-                    this.ctx.stroke()
+                case 'circle': {
+                    const style = {stroke: 'white'} as CtxStyle
+                    this.ctx2.circle(object.position, object.radius, style)
                     break;
+                }
                 case 'rect':
                     
                     break;

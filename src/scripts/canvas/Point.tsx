@@ -8,6 +8,12 @@ class Point {
     add(point: Point) {
         return new Point(this.x + point.x, this.y + point.y);
     }
+    sub(point: Point) {
+        return new Point(this.x - point.x, this.y - point.y);
+    }
+    power(number: number) {
+        return new Point(this.x * number, this.y * number);
+    }
 }
 
 export { Point }
