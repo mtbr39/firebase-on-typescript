@@ -25,6 +25,9 @@ class Ctx2 {
         return this.org.add(point).sub(this.cameraPosition).power(this.cw)
         // return new Point( (this.org.x + point.x - this.cameraPosition.x) * this.cw, (this.org.y + point.y - this.cameraPosition.y) * this.cw )
     }
+    calcPoint(canvasPoint:Point): Point {
+        return canvasPoint.power(1/this.cw).sub(this.org).add(this.cameraPosition)
+    }
      
     circle(p: Point, radius: number, style: CtxStyle) {
         this.ctx.beginPath();

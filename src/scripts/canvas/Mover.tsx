@@ -17,6 +17,11 @@ class Mover {
     drawSelf() {
 
     }
+
+    onInput(eventType: string, mousePosition: Point) {
+        console.log("Mover-input-debug", eventType)
+        this.position = mousePosition
+    }
 }
 
 export default Mover
