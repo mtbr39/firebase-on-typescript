@@ -1,13 +1,33 @@
 
-const initCanvas = (ctx: CanvasRenderingContext2D) => {
+import ObjectManager from "./ObjectManager"
+import Mover from "./Mover"
 
-    ctx.beginPath();
-    ctx.arc(230, 60, 40, 0, Math.PI * 2, true);
-    ctx.fillStyle = "lightskyblue";
-    ctx.fill();
-    ctx.strokeStyle = 'deepskyblue';
-    ctx.lineWidth = 5;
-    ctx.stroke();
+const initCanvas = (canvas: HTMLCanvasElement) => {
+
+    const objectManager = new ObjectManager(canvas)
+
+    const mover1 = new Mover()
+    objectManager.submit(mover1)
+
+    // FrameLoop
+    const fps = 60
+
+    let targetInterval = 1000 / fps
+    let previousTime = Date.now() - targetInterval
+
+    function loop() {
+        let currentTime = Date.now()
+        if (currentTime - previousTime > targetInterval) {
+            
+            objectManager.update()
+            objectManager.draw()
+
+            previousTime = Date.now()
+        }
+        requestAnimationFrame(loop)
+    }
+
+    loop()
 
 }
 
