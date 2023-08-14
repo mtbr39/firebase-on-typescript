@@ -14,6 +14,7 @@ class Point {
     power(number: number) {
         return new Point(this.x * number, this.y * number);
     }
+    static zero: Point = new Point(0, 0)
 }
 
 export { Point }
