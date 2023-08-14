@@ -35,15 +35,18 @@ const initCanvas = (canvas: HTMLCanvasElement) => {
     loop()
 
     let cssCanvasSize = {width: document.documentElement.clientWidth, height: document.documentElement.clientHeight};
-    let pixelRatioCanvasSize = {width: cssCanvasSize.width * window.devicePixelRatio, height: cssCanvasSize.height * window.devicePixelRatio};
+    // let pixelRatioCanvasSize = {width: cssCanvasSize.width * window.devicePixelRatio, height: cssCanvasSize.height * window.devicePixelRatio};
 
     resizeCanvas();
 
     function resizeCanvas() {
         canvas.style.width = `${cssCanvasSize.width}px`;
         canvas.style.height = `${cssCanvasSize.height}px`;
-        canvas.width = pixelRatioCanvasSize.width;
-        canvas.height = pixelRatioCanvasSize.height;
+
+        // canvas.width = pixelRatioCanvasSize.width;
+        // canvas.height = pixelRatioCanvasSize.height;
+        canvas.width = cssCanvasSize.width;
+        canvas.height = cssCanvasSize.height;
         // if(Utl.isSmartPhone()) {
         //     canvas.width = size.w * window.devicePixelRatio;
         //     canvas.height = size.h * window.devicePixelRatio;
