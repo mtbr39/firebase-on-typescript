@@ -4,6 +4,7 @@ interface Mover {
     position: Point
     radius: number
     drawType: string
+    velocity: number
 
     update(): void
     drawSelf(): void
