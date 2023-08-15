@@ -2,7 +2,7 @@
 import ObjectManager from "./ObjectManager"
 // import Mover from "./Mover"
 import InputManager from "./InputManager"
-import { Radicon } from "./Radicon";
+import { BasicRadiconSender, Radicon } from "./Radicon";
 import { OtherPlayerManager } from "./OtherPlayer";
 import FirebaseController from "../firebase/FirebaseController";
 // import Utl from "./Utl"
@@ -17,11 +17,15 @@ const initCanvas = (canvas: HTMLCanvasElement) => {
     const objectManager = new ObjectManager(canvas, window.devicePixelRatio)
     const inputManager = new InputManager(canvas, objectManager.drawer.ctx2)
 
-    const mover1 = new Radicon()
+
+    const mover1 = new Radicon(
+        new BasicRadiconSender(firebase.database)
+    )
     objectManager.submit(mover1)
     inputManager.submit(mover1)
 
     const otherPlayerManager = new OtherPlayerManager(objectManager)
+    console.log("init-otherPlayerManager", otherPlayerManager)
 
     // FrameLoop
     const fps = 60
@@ -33,7 +37,6 @@ const initCanvas = (canvas: HTMLCanvasElement) => {
         let currentTime = Date.now()
         if (currentTime - previousTime > targetInterval) {
             
-            firebase.database.updateUserData(mover1.position.rowVector())
             inputManager.update()
             objectManager.update()
             objectManager.draw()
