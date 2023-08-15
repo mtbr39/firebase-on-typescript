@@ -9,7 +9,7 @@ const initCanvas = (canvas: HTMLCanvasElement) => {
 
     canvas.style.backgroundColor = '#213547';
 
-    const objectManager = new ObjectManager(canvas)
+    const objectManager = new ObjectManager(canvas, window.devicePixelRatio)
     const inputManager = new InputManager(canvas, objectManager.drawer.ctx2)
 
     const mover1 = new Radicon()
@@ -38,7 +38,7 @@ const initCanvas = (canvas: HTMLCanvasElement) => {
     loop()
 
     let cssCanvasSize = {width: document.documentElement.clientWidth, height: document.documentElement.clientHeight};
-    // let pixelRatioCanvasSize = {width: cssCanvasSize.width * window.devicePixelRatio, height: cssCanvasSize.height * window.devicePixelRatio};
+    let pixelRatioCanvasSize = {width: cssCanvasSize.width * window.devicePixelRatio, height: cssCanvasSize.height * window.devicePixelRatio};
 
     resizeCanvas();
 
@@ -46,10 +46,10 @@ const initCanvas = (canvas: HTMLCanvasElement) => {
         canvas.style.width = `${cssCanvasSize.width}px`;
         canvas.style.height = `${cssCanvasSize.height}px`;
 
-        // canvas.width = pixelRatioCanvasSize.width;
-        // canvas.height = pixelRatioCanvasSize.height;
-        canvas.width = cssCanvasSize.width;
-        canvas.height = cssCanvasSize.height;
+        canvas.width = pixelRatioCanvasSize.width;
+        canvas.height = pixelRatioCanvasSize.height;
+        // canvas.width = cssCanvasSize.width;
+        // canvas.height = cssCanvasSize.height;
         // if(Utl.isSmartPhone()) {
         //     canvas.width = size.w * window.devicePixelRatio;
         //     canvas.height = size.h * window.devicePixelRatio;

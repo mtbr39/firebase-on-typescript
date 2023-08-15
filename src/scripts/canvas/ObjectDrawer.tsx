@@ -9,10 +9,10 @@ class ObjectDrawer {
     ctx: CanvasRenderingContext2D
     ctx2: Ctx2
 
-    constructor(canvas: HTMLCanvasElement) {
+    constructor(canvas: HTMLCanvasElement, devicePixelRatio: number) {
         this.canvas = canvas
         this.ctx = canvas.getContext("2d")!
-        const cw = Math.sqrt(canvas.width * canvas.height) * 0.01
+        const cw = Math.sqrt(canvas.width * canvas.height) / devicePixelRatio * 0.01
         const org = new Point(0,0)
         this.ctx2 = new Ctx2(this.ctx, cw, org)
     }

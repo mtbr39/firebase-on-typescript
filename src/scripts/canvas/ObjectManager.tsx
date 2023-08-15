@@ -6,8 +6,8 @@ class ObjectManager {
     objects: Mover[] = []
     drawer: ObjectDrawer
 
-    constructor(canvas: HTMLCanvasElement) {
-        this.drawer = new ObjectDrawer(canvas)
+    constructor(canvas: HTMLCanvasElement, devicePixelRatio: number) {
+        this.drawer = new ObjectDrawer(canvas, devicePixelRatio)
     }
 
     update() {
