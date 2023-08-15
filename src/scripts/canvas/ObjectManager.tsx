@@ -23,7 +23,6 @@ class ObjectManager {
 
     submit(object: Mover) {
         this.objects.push(object)
-        console.log("submit-debug", this.objects);
     }
 }
 

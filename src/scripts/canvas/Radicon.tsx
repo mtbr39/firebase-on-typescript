@@ -11,8 +11,6 @@ class Radicon implements Mover {
     
     destinationPoint: Point = Point.zero
     isGoingDestination: Boolean = false
-
-    // private move = new PositionCalculator()
     
     constructor() {
 
@@ -29,7 +27,7 @@ class Radicon implements Mover {
     }
 
     onInput(eventType: string, mousePosition: Point) {
-        console.log("Radicon-onInput-debug", eventType, mousePosition)
+        // console.log("Radicon-onInput-debug", eventType, mousePosition)
         this.isGoingDestination = true
         this.destinationPoint = mousePosition
         

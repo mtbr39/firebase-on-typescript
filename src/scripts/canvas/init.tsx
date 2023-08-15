@@ -3,12 +3,16 @@ import ObjectManager from "./ObjectManager"
 // import Mover from "./Mover"
 import InputManager from "./InputManager"
 import { Radicon } from "./Radicon";
+import { OtherPlayerManager } from "./OtherPlayer";
+import FirebaseController from "../firebase/FirebaseController";
 // import Utl from "./Utl"
 
 const initCanvas = (canvas: HTMLCanvasElement) => {
 
-    canvas.style.backgroundColor = '#213547';
-    resizeCanvas();
+    canvas.style.backgroundColor = '#213547'
+    resizeCanvas()
+
+    const firebase = new FirebaseController()
 
     const objectManager = new ObjectManager(canvas, window.devicePixelRatio)
     const inputManager = new InputManager(canvas, objectManager.drawer.ctx2)
@@ -16,6 +20,8 @@ const initCanvas = (canvas: HTMLCanvasElement) => {
     const mover1 = new Radicon()
     objectManager.submit(mover1)
     inputManager.submit(mover1)
+
+    const otherPlayerManager = new OtherPlayerManager(objectManager)
 
     // FrameLoop
     const fps = 60
@@ -37,7 +43,7 @@ const initCanvas = (canvas: HTMLCanvasElement) => {
     }
 
     loop()
-    
+
     function resizeCanvas() {
         let cssCanvasSize = {width: document.documentElement.clientWidth, height: document.documentElement.clientHeight};
         let pixelRatioCanvasSize = {width: cssCanvasSize.width * window.devicePixelRatio, height: cssCanvasSize.height * window.devicePixelRatio};
