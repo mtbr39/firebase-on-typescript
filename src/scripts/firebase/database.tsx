@@ -1,17 +1,30 @@
 import { FirebaseApp } from "firebase/app";
 import { User } from "firebase/auth";
-import { Database, getDatabase, ref, set, update } from "firebase/database";
+import { Database, getDatabase, onValue, ref, set, update } from "firebase/database";
 // import { Position } from "../canvas/Point";
 
 class FirebaseRealtimeDatabase {
     app: FirebaseApp
     db: Database
-    rootKeyName: string = "vite_react_202308"
     currentUser: User = {uid: "none"} as User
+
+    rootKeyName: string = "vite_react_202308"
+    syncDataPlayersRef: string
 
     constructor(app: FirebaseApp) {
         this.app = app
         this.db = getDatabase(this.app);
+
+        this.syncDataPlayersRef = `${this.rootKeyName}/syncData/players`;
+        onValue(ref(this.db, this.syncDataPlayersRef), (snapshot) => {
+            const data = snapshot.val();
+            if(!!data==!!data){}
+            // updatePlayers(data);
+        });
+    }
+
+    setUser(currentUser: User) {
+        this.currentUser = currentUser
     }
 
     writeUserData(userId: any, name: any, email: any, imageUrl: any) {
@@ -38,15 +51,13 @@ class FirebaseRealtimeDatabase {
             position: position
         };
 
-        const key: string = this.rootKeyName + '/users/' + this.currentUser.uid
+        const key: string = this.syncDataPlayersRef + this.currentUser.uid
         const updates= {[key]: userData}
 
         return update(ref(db), updates);
     }
 
-    setUser(currentUser: User) {
-        this.currentUser = currentUser
-    }
+
 }
 
 export default FirebaseRealtimeDatabase

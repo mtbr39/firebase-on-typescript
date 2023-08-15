@@ -1,12 +1,15 @@
 
+import FirebaseRealtimeDatabase from "../firebase/database";
 import Mover from "./Mover";
 import ObjectManager from "./ObjectManager";
 import { Point, Position } from "./Point";
 
 class OtherPlayerManager {
     players: Mover[] = []
+    networker: OtherPlayerNetworker
 
-    constructor(objectManagaer: ObjectManager) {
+    constructor(objectManagaer: ObjectManager, networker: OtherPlayerNetworker) {
+        this.networker = networker
         
         for (let i=0; i<4; i++) {
             let player = new OtherPlayer()
@@ -48,4 +51,15 @@ class OtherPlayer implements Mover {
 
 }
 
-export {OtherPlayer, OtherPlayerManager}
+interface OtherPlayerNetworker {
+
+}
+
+class BasicOtherPlayerNetworker implements OtherPlayerNetworker {
+    db: FirebaseRealtimeDatabase
+    constructor(db: FirebaseRealtimeDatabase) {
+        this.db = db
+    }
+}
+
+export {OtherPlayer, OtherPlayerManager, BasicOtherPlayerNetworker}
