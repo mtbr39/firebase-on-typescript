@@ -13,16 +13,18 @@ class Ctx2 {
     cw: number
     org: Point
     cameraPosition: Point = new Point(0,0)
+    devicePixelRatio: number
 
-    constructor(ctx: CanvasRenderingContext2D, cw: number, org: Point) {
+    constructor(ctx: CanvasRenderingContext2D, cw: number, org: Point, devicePixelRatio:number) {
         this.ctx = ctx
         this.cw = cw
         this.org = org
+        this.devicePixelRatio = devicePixelRatio
     }
 
 
     canvasPoint(point:Point): Point {
-        return this.org.add(point).sub(this.cameraPosition).power(this.cw)
+        return this.org.add(point).sub(this.cameraPosition).power(this.cw * this.devicePixelRatio)
     }
     calcPoint(canvasPoint:Point): Point {
         return canvasPoint.power(1/this.cw).sub(this.org).add(this.cameraPosition)
