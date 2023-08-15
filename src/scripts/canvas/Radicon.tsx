@@ -3,13 +3,15 @@ import { Point } from "./Point";
 
 
 
-class Radicon extends Mover {
+class Radicon implements Mover {
+    position: Point = new Point(230, 60)
+    radius: number = 10
+    drawType: string = 'circle'
     
     destinationPoint: Point = Point.zero
     isGoingDestination: Boolean = false
     
     constructor() {
-        super()
 
     }
 

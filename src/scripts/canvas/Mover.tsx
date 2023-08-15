@@ -1,27 +1,13 @@
 import { Point } from "./Point"
 
-class Mover {
+interface Mover {
+    position: Point
+    radius: number
+    drawType: string
 
-    position: Point = new Point(230, 60)
-    radius: number = 10
-    drawType: string = 'circle'
-
-    constructor() {
-
-    }
-
-    update() {
-        this.position.x++
-    }
-
-    drawSelf() {
-
-    }
-
-    onInput(eventType: string, mousePosition: Point) {
-        console.log("Mover-input-debug", eventType)
-        this.position = mousePosition
-    }
+    update(): void
+    drawSelf(): void
+    onInput(eventType: string, mousePosition: Point): void
 }
 
 export default Mover

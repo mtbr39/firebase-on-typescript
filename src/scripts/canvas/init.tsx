@@ -1,7 +1,8 @@
 
 import ObjectManager from "./ObjectManager"
-import Mover from "./Mover"
+// import Mover from "./Mover"
 import InputManager from "./InputManager"
+import { Radicon } from "./Radicon";
 // import Utl from "./Utl"
 
 const initCanvas = (canvas: HTMLCanvasElement) => {
@@ -11,7 +12,7 @@ const initCanvas = (canvas: HTMLCanvasElement) => {
     const objectManager = new ObjectManager(canvas)
     const inputManager = new InputManager(canvas, objectManager.drawer.ctx2)
 
-    const mover1 = new Mover()
+    const mover1 = new Radicon()
     objectManager.submit(mover1)
     inputManager.submit(mover1)
 
