@@ -1,10 +1,10 @@
 import Mover from "./Mover";
-import { Point } from "./Point";
+import { Point, Position } from "./Point";
 
 
 
 class Radicon implements Mover {
-    position: Point = new Point(230, 60)
+    position: Position = new Position(230, 60)
     radius: number = 10
     drawType: string = 'circle'
     velocity: number = 4
@@ -12,7 +12,7 @@ class Radicon implements Mover {
     destinationPoint: Point = Point.zero
     isGoingDestination: Boolean = false
 
-    private move = new PositionCalculator()
+    // private move = new PositionCalculator()
     
     constructor() {
 
@@ -20,7 +20,7 @@ class Radicon implements Mover {
 
     update() {
         if (this.isGoingDestination) {
-            this.moveTowards()
+            this.position.move(this.destinationPoint, this.velocity)
         }
     }
 
@@ -35,28 +35,7 @@ class Radicon implements Mover {
         
     }
 
-    moveTowards() {
-        this.position = this.move.getMovePosition(this.position, this.destinationPoint, this.velocity)
-    }
-
 }
-
-class PositionCalculator {
-    getMovePosition(position: Point, destinationPoint: Point, velocity: number) {
-        return position.add(this.getDeltaMoveTowards(position, destinationPoint, velocity))
-    }
-
-    getDeltaMoveTowards(startPoint: Point, destinationPoint: Point, velocity: number): Point {
-        const towardsVector = destinationPoint.sub(startPoint)
-        const towardsDirection = Math.atan2( towardsVector.y, towardsVector.x )
-        return this.getDeltaToDirection(towardsDirection, velocity)
-    }
-
-    getDeltaToDirection(direction: number, velocity: number) {
-        return new Point( velocity * Math.cos(direction), velocity * Math.sin(direction) )
-    }
-}
-
 
 
 export {Radicon}
