@@ -33,6 +33,7 @@ const initCanvas = (canvas: HTMLCanvasElement) => {
         let currentTime = Date.now()
         if (currentTime - previousTime > targetInterval) {
             
+            firebase.database.updateUserData(mover1.position.rowVector())
             inputManager.update()
             objectManager.update()
             objectManager.draw()

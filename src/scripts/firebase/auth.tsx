@@ -24,23 +24,13 @@ class FirebaseAuth {
   }
 
   signIn() {
-    signInAnonymously(this.auth)
-        .then(() => {
-            // Signed in..
-            console.log("匿名認証完了")
-        })
-        .catch((error) => {
-            console.log("匿名認証時エラー", error)
-            // const errorCode = error.code;
-            // const errorMessage = error.message;
-            // ...
-        });
+    return signInAnonymously(this.auth)
   }
 
   getCurrentUser() {
     const user = this.auth.currentUser;
 
-    return user ? user : "no-current-user"
+    return user
   }
 
 }

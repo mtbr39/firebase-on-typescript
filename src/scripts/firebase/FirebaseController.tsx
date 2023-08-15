@@ -1,5 +1,6 @@
 import { FirebaseApp, initializeApp } from "firebase/app";
 import FirebaseAuth from "./auth";
+import FirebaseRealtimeDatabase from "./database";
 
 
 const firebaseConfig = {
@@ -16,12 +17,34 @@ const firebaseConfig = {
 class FirebaseController {
     app: FirebaseApp
     auth: FirebaseAuth
+    database: FirebaseRealtimeDatabase
 
     constructor() {
         this.app = initializeApp(firebaseConfig);
         this.auth = new FirebaseAuth(this.app)
-        this.auth.signIn()
+        this.auth.signIn().then(() => {
+            // Signed in..
+            console.log("匿名認証完了")
+            this.setUserToDB()
+        })
+        .catch((error) => {
+            console.log("匿名認証時エラー", error)
+            // const errorCode = error.code;
+            // const errorMessage = error.message;
+            // ...
+        });
+        this.database = new FirebaseRealtimeDatabase(this.app)
 
+    }
+
+    setUserToDB() {
+        const currentUser = this.auth.getCurrentUser()
+        if(currentUser) {
+            this.database.setUser(currentUser)
+        } else {
+            console.log("firebaseControllerにて_currentUser取得失敗")
+        }
+        
     }
 
 }

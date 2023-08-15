@@ -48,6 +48,10 @@ class Position extends Point {
     protected getDeltaToDirection(direction: number, velocity: number) {
         return new Point( velocity * Math.cos(direction), velocity * Math.sin(direction) )
     }
+
+    rowVector() {
+        return {x: this.x, y: this.y}
+    }
 }
 
 export { Point, Position }
