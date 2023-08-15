@@ -6,6 +6,8 @@ import InputManager from "./InputManager"
 
 const initCanvas = (canvas: HTMLCanvasElement) => {
 
+    canvas.style.backgroundColor = '#213547';
+
     const objectManager = new ObjectManager(canvas)
     const inputManager = new InputManager(canvas, objectManager.drawer.ctx2)
 
