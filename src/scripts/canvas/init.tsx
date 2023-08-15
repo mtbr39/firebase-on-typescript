@@ -8,6 +8,7 @@ import { Radicon } from "./Radicon";
 const initCanvas = (canvas: HTMLCanvasElement) => {
 
     canvas.style.backgroundColor = '#213547';
+    resizeCanvas();
 
     const objectManager = new ObjectManager(canvas, window.devicePixelRatio)
     const inputManager = new InputManager(canvas, objectManager.drawer.ctx2)
@@ -36,13 +37,11 @@ const initCanvas = (canvas: HTMLCanvasElement) => {
     }
 
     loop()
-
-    let cssCanvasSize = {width: document.documentElement.clientWidth, height: document.documentElement.clientHeight};
-    let pixelRatioCanvasSize = {width: cssCanvasSize.width * window.devicePixelRatio, height: cssCanvasSize.height * window.devicePixelRatio};
-
-    resizeCanvas();
-
+    
     function resizeCanvas() {
+        let cssCanvasSize = {width: document.documentElement.clientWidth, height: document.documentElement.clientHeight};
+        let pixelRatioCanvasSize = {width: cssCanvasSize.width * window.devicePixelRatio, height: cssCanvasSize.height * window.devicePixelRatio};
+
         canvas.style.width = `${cssCanvasSize.width}px`;
         canvas.style.height = `${cssCanvasSize.height}px`;
 

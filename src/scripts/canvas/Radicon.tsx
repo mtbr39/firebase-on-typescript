@@ -7,7 +7,7 @@ class Radicon implements Mover {
     position: Position = new Position(230, 60)
     radius: number = 10
     drawType: string = 'circle'
-    velocity: number = 4
+    velocity: number = 2
     
     destinationPoint: Point = Point.zero
     isGoingDestination: Boolean = false
