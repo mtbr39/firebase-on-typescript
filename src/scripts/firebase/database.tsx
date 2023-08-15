@@ -51,7 +51,7 @@ class FirebaseRealtimeDatabase {
             position: position
         };
 
-        const key: string = this.syncDataPlayersRef + this.currentUser.uid
+        const key: string = this.syncDataPlayersRef + "/" + this.currentUser.uid
         const updates= {[key]: userData}
 
         return update(ref(db), updates);
