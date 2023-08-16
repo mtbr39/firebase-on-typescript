@@ -3,7 +3,7 @@ import ObjectManager from "./ObjectManager"
 // import Mover from "./Mover"
 import InputManager from "./InputManager"
 import { BasicRadiconSender, Radicon } from "./Radicon";
-import { BasicOtherPlayerNetworker, OtherPlayerManager } from "./OtherPlayer";
+import { OtherPlayerManager } from "./OtherPlayer";
 import FirebaseController from "../firebase/FirebaseController";
 // import Utl from "./Utl"
 
@@ -26,7 +26,7 @@ const initCanvas = (canvas: HTMLCanvasElement) => {
 
     const otherPlayerManager = new OtherPlayerManager(
         objectManager,
-        new BasicOtherPlayerNetworker(firebase.database)
+        firebase.database.otherPlayerNetworker
     )
     console.log("init-otherPlayerManager", otherPlayerManager)
 

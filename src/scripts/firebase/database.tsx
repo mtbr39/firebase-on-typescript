@@ -1,6 +1,7 @@
 import { FirebaseApp } from "firebase/app";
 import { User } from "firebase/auth";
-import { Database, getDatabase, onValue, ref, set, update } from "firebase/database";
+import { Database, getDatabase, ref, set, update } from "firebase/database";
+import { BasicOtherPlayerNetworker } from "../canvas/OtherPlayer";
 // import { Position } from "../canvas/Point";
 
 class FirebaseRealtimeDatabase {
@@ -11,16 +12,16 @@ class FirebaseRealtimeDatabase {
     rootKeyName: string = "vite_react_202308"
     syncDataPlayersRef: string
 
+    otherPlayerNetworker: BasicOtherPlayerNetworker
+
     constructor(app: FirebaseApp) {
         this.app = app
         this.db = getDatabase(this.app);
 
         this.syncDataPlayersRef = `${this.rootKeyName}/syncData/players`;
-        onValue(ref(this.db, this.syncDataPlayersRef), (snapshot) => {
-            const data = snapshot.val();
-            if(!!data==!!data){}
-            // updatePlayers(data);
-        });
+
+        this.otherPlayerNetworker = new BasicOtherPlayerNetworker(this.db, this.syncDataPlayersRef)
+
     }
 
     setUser(currentUser: User) {
@@ -35,8 +36,6 @@ class FirebaseRealtimeDatabase {
             profile_picture : imageUrl
         });
     }
-
-    
 
     updateUserData(position: {x: number, y: number}) {
         if (this.currentUser.uid === "none") {
@@ -56,7 +55,6 @@ class FirebaseRealtimeDatabase {
 
         return update(ref(db), updates);
     }
-
 
 }
 
