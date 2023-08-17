@@ -20,12 +20,13 @@ class FirebaseRealtimeDatabase {
 
         this.syncDataPlayersRef = `${this.rootKeyName}/syncData/players`;
 
-        this.otherPlayerNetworker = new BasicOtherPlayerNetworker(this.db, this.syncDataPlayersRef)
+        this.otherPlayerNetworker = new BasicOtherPlayerNetworker(this.db, this.syncDataPlayersRef, this.currentUser)
 
     }
 
     setUser(currentUser: User) {
         this.currentUser = currentUser
+        this.otherPlayerNetworker.user = currentUser
     }
 
     writeUserData(userId: any, name: any, email: any, imageUrl: any) {

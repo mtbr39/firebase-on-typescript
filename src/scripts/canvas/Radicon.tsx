@@ -14,7 +14,7 @@ class Radicon implements Mover {
     isGoingDestination: Boolean = false
 
     sender: RadiconSender
-    private sendPace: {count: number, maxCount: number} = {count: 0, maxCount: 60}
+    private sendPace: {count: number, maxCount: number} = {count: 0, maxCount: 20}
     
     constructor(sender: RadiconSender) {
         this.sender = sender

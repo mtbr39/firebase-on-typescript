@@ -1,4 +1,5 @@
 
+import { User } from "firebase/auth";
 import Mover from "./Mover";
 import ObjectManager from "./ObjectManager";
 import { Point, Position } from "./Point";
@@ -58,10 +59,12 @@ export interface OtherPlayerNetworker {
 class BasicOtherPlayerNetworker implements OtherPlayerNetworker {
     db: Database
     syncDataPlayersRef: string
+    user: User
 
-    constructor(db: Database, syncDataPlayersRef: string) {
+    constructor(db: Database, syncDataPlayersRef: string, user: User) {
         this.db = db
         this.syncDataPlayersRef = syncDataPlayersRef
+        this.user = user
     }
 
     public submitUpdatePlayersFunctionOnValue(players: OtherPlayer[], objectManagaer: ObjectManager) {
@@ -78,20 +81,23 @@ class BasicOtherPlayerNetworker implements OtherPlayerNetworker {
             const uid = key
             const position = syncDataJson[key].position
 
-            let existPlayerMatchedUid = false
-            players.forEach( (player) => {
-                if(uid === player.uid) {
-                    player.position = position
-                    existPlayerMatchedUid = true
+            if (uid !== this.user.uid) {
+                let existPlayerMatchedUid = false
+                players.forEach( (player) => {
+                    if(uid === player.uid) {
+                        player.position = position
+                        existPlayerMatchedUid = true
+                    }
+                } )
+                if(!existPlayerMatchedUid) {
+                    const newPlayer = new OtherPlayer()
+                    newPlayer.uid = uid
+                    newPlayer.position = position
+                    players.push( newPlayer )
+                    objectManagaer.submit( newPlayer )
                 }
-            } )
-            if(!existPlayerMatchedUid) {
-                const newPlayer = new OtherPlayer()
-                newPlayer.uid = uid
-                newPlayer.position = position
-                players.push( newPlayer )
-                objectManagaer.submit( newPlayer )
             }
+            
         });
     }
 }

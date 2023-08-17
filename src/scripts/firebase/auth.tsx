@@ -1,10 +1,11 @@
 import { FirebaseApp } from "firebase/app";
-import { getAuth, signInAnonymously, onAuthStateChanged, Auth } from "firebase/auth";
+import { getAuth, signInAnonymously, onAuthStateChanged, Auth, User } from "firebase/auth";
 
 
 
 class FirebaseAuth {
   auth: Auth
+  user: User = {uid: "none"} as User
 
   constructor(app: FirebaseApp) {
     this.auth = getAuth(app);
@@ -13,8 +14,7 @@ class FirebaseAuth {
         if (user) {
             // User is signed in, see docs for a list of available properties
             // https://firebase.google.com/docs/reference/js/auth.user
-            const uid = user.uid;
-            console.log("auth-debug", uid, user)
+            this.user = user
         } else {
             // User is signed out
             console.log("ユーザーがサインアウトしました")
